@@ -1,0 +1,22 @@
+-- 2) 投资积极且偏好理财类产品的客户
+--   请用一条SQL语句实现该查询：
+select t1.pro_c_id pro_c_id
+from
+(select pro_c_id,count(*) as p_count
+from property,finances_product
+where pro_pif_id=p_id AND pro_type=1
+group by pro_c_id
+having count(*)>=3) t1,
+(select pro_c_id,count(*) as f_count
+from property,fund
+where pro_pif_id=f_id AND pro_type=3
+group by pro_c_id) t2
+where t1.p_count>t2.f_count AND t1.pro_c_id=t2.pro_c_id
+
+
+
+
+
+
+
+/*  end  of  your code  */
